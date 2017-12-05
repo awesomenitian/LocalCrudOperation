@@ -1,0 +1,245 @@
+	<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta content="Content-type: application/json" charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Employee Management</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/main-styles.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+	<link href="font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	
+	
+<script type="text/javascript" src="js/jquery.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<link type="text/css" rel="stylesheet" href="css/jquery-ui.css">
+
+<script type="text/javascript" src="js/data.js"></script>
+
+</head>
+
+<body class="form-horizontal" onload="init()">
+<!--Add Info Modal Starts-->
+<div id="AddInfoModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add New Employee</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group m-b-10 m-b-10-mb">
+		<label class="col-sm-4 col-md-4 col-xs-12 control-label" for="fname">Firstname</label>
+		<div class="col-sm-6 col-md-6 col-xs-12"><input type="text" id="fname" class="form-control"/></div>
+		</div>
+		<div class="form-group m-b-10 m-b-10-mb">
+		<label class="col-sm-4 col-md-4 col-xs-12 control-label" for="lname">Lastname</label>
+		<div class="col-sm-6 col-md-6 col-xs-12"><input type="text" id="lname" class="form-control"/></div>
+		</div>
+		<div class="form-group m-b-10 m-b-10-mb">
+		<label class="col-sm-4 col-md-4 col-xs-12 control-label" for="gender">Gender</label>
+		<div class="col-sm-6 col-md-6 col-xs-12"><input type="text" id="gender" class="form-control"/></div>
+		</div>
+		<div class="form-group m-b-10 m-b-10-mb">
+		<label class="col-sm-4 col-md-4 col-xs-12 control-label" for="email">Email</label>
+		<div class="col-sm-6 col-md-6 col-xs-12"><input type="text" id="email" class="form-control"/></div>
+		</div>
+		<div class="form-group m-b-10 m-b-10-mb">
+		<label class="col-sm-4 col-md-4 col-xs-12 control-label" for="phone">Phone</label>
+		<div class="col-sm-6 col-md-6 col-xs-12"><input type="text" id="phone" class="form-control"/></div>
+		</div>
+		<div class="form-group m-b-10 m-b-10-mb">
+		<label class="col-sm-4 col-md-4 col-xs-12 control-label" for="state">State</label>
+		<div class="col-sm-6 col-md-6 col-xs-12"><input type="text" id="state" class="form-control"/></div>
+		</div>
+      </div>
+      <div class="modal-footer">
+	  <button type="submit" class="btn btn-primary" id="submit" onclick="onRegister()">Add</button>
+        <button type="button" class="btn btn-cancel" id="clear" onclick="emptyValue()">Clear</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--Add Info Modal Ends-->
+
+<!--Edit Info Modal Starts
+<div id="EditInfoModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Employee Info</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group m-b-10 m-b-10-mb">
+		<label class="col-sm-4 col-md-4 col-xs-12 control-label" for="fname">Firstname</label>
+		<div class="col-sm-6 col-md-6 col-xs-12"><input type="text" id="fname" class="form-control"/></div>
+		</div>
+		<div class="form-group m-b-10 m-b-10-mb">
+		<label class="col-sm-4 col-md-4 col-xs-12 control-label" for="lname">Lastname</label>
+		<div class="col-sm-6 col-md-6 col-xs-12"><input type="text" id="lname" class="form-control"/></div>
+		</div>
+		<div class="form-group m-b-10 m-b-10-mb">
+		<label class="col-sm-4 col-md-4 col-xs-12 control-label" for="gender">Gender</label>
+		<div class="col-sm-6 col-md-6 col-xs-12"><input type="text" id="gender" class="form-control"/></div>
+		</div>
+		<div class="form-group m-b-10 m-b-10-mb">
+		<label class="col-sm-4 col-md-4 col-xs-12 control-label" for="email">Email</label>
+		<div class="col-sm-6 col-md-6 col-xs-12"><input type="text" id="email" class="form-control"/></div>
+		</div>
+		<div class="form-group m-b-10 m-b-10-mb">
+		<label class="col-sm-4 col-md-4 col-xs-12 control-label" for="phone">Phone</label>
+		<div class="col-sm-6 col-md-6 col-xs-12"><input type="text" id="phone" class="form-control"/></div>
+		</div>
+		<div class="form-group m-b-10 m-b-10-mb">
+		<label class="col-sm-4 col-md-4 col-xs-12 control-label" for="state">State</label>
+		<div class="col-sm-6 col-md-6 col-xs-12"><input type="text" id="state" class="form-control"/></div>
+		</div>
+      </div>
+      <div class="modal-footer">
+	  <button type="submit" class="btn btn-primary" id="submit" onclick="onRegister()">Submit</button>
+        <button type="button" class="btn btn-cancel" id="clear" onclick="emptyValue()">Clear</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--Edit Info Modal Ends-->
+
+
+<!-- Wrap all page content here -->
+<div id="wrap">
+  
+  <!-- Fixed navbar -->
+  <div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"><i class="fa fa-right-square"></i> EMP Management</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav pull-right">
+          <li><a href="#" class="simpletext whitetext">admin@contoso.com <i class="fa fa-user"></i></a></li>
+          <li><a class="simpletext greytext">|</a></li>
+          <li><a href="#contact" class="wtlinkbtn">Logout <i class="fa fa-signout"></i></a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+  
+  <!-- Begin page content -->
+  <div id="main">
+  <div class="container">
+  
+    <div class="form-group">
+	  <div class="col-sm-12 col-md-12 col-xs-12">
+	  <h1>Employee Management</h1>
+	  </div>
+	  </div>
+	  
+      <div class="form-group">
+	  <div class="col-sm-3 col-md-3 col-xs-12">
+	  <input type="text" id="myInp" class="form-control m-b-10-mb" name="search" placeholder="Search.."/>
+	  <span class="fa fa-search form-control-feedback"></span>
+	  </div>
+	  <div class="col-sm-3 col-sm-offset-6 col-xs-12 text-right"><button class="btn btn-primary" data-toggle="modal" data-target="#AddInfoModal"><i class="fa fa-plus-circle"></i> Add New</button></div>
+	  </div>
+	  
+	  <div class="form-group">
+	  <div class="col-sm-12 col-md-12 col-xs-12 m-t-20">    
+<div class="table-responsive"> 	  
+  <table class="table table-striped" id="tableData">
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Gender</th>
+		<th>Email</th>
+		<th>Phone</th>
+		<th>State</th>
+		<th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="tableRowsData">
+      <!-- <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>Male</td>
+		<td>John.doe@xyz.com</td>
+		<td>0123456789</td>
+		<td>Active</td>
+		<td><a href="#" data-toggle="popover" class="greylinkbtn m-r-10"><i class="fa fa-file"></i></a> <a href="#" class="greylinkbtn m-r-10" data-toggle="modal" data-target="#EditInfoModal"><i class="fa fa-pencil"></i></a> <a href="#" class="redlinkbtn"><i class="fa fa-remove"></i></a></td>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>Male</td>
+		<td>John.doe@xyz.com</td>
+		<td>0123456789</td>
+		<td>Active</td>
+		<td><a href="#" class="greylinkbtn m-r-10"><i class="fa fa-file"></i></a> <a href="#" class="greylinkbtn m-r-10"><i class="fa fa-pencil"></i></a> <a href="#" class="redlinkbtn"><i class="fa fa-remove"></i></a></td>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>Male</td>
+		<td>John.doe@xyz.com</td>
+		<td>0123456789</td>
+		<td>Active</td>
+		<td><a href="#" class="greylinkbtn m-r-10"><i class="fa fa-file"></i></a> <a href="#" class="greylinkbtn m-r-10"><i class="fa fa-pencil"></i></a> <a href="#" class="redlinkbtn"><i class="fa fa-remove"></i></a></td>
+      </tr> -->
+    </tbody>
+  </table>
+  </div>
+	  </div>
+	  </div>
+   
+    </div>
+  </div>
+  
+</div>
+
+<div id="footer">
+  <div class="container">
+    <p class="lead">&copy; EM copyrights reserved 2017</p>
+  </div>
+</div>
+
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+
+	
+</body>
+</html>
